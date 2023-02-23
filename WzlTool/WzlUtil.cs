@@ -45,6 +45,11 @@ namespace WzlTool
                 int offset = 64;
                 foreach (FileInfo imgFile in imgFiles)
                 {
+                    String imgFileExt = imgFile.Extension.ToLower();
+                    if (!imgFileExt.Equals(".png") && !imgFileExt.Equals(".jpg") && !imgFileExt.Equals(".jpeg"))
+                    {
+                        continue;
+                    }
                     Bitmap bufferedImage = new Bitmap(imgFile.FullName);
 
                     int width = bufferedImage.Width;

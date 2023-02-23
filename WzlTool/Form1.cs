@@ -16,8 +16,8 @@ namespace WzlTool
         private void Form1_Load(object sender, EventArgs e)
         {
             typeComboBox.SelectedIndex = 0;
-            resoucePathText.Text = "D:\\nuoran\\资源\\wzl测试";
-            outText.Text = "D:\\nuoran\\资源\\wzl测试";
+            //resoucePathText.Text = "D:\\nuoran\\资源\\wzl测试";
+            //outText.Text = "D:\\nuoran\\资源\\wzl测试";
 
             //实例化委托
             updateTxt = new UpdateTxt(UpdateTxtMethod);
@@ -91,15 +91,28 @@ namespace WzlTool
 
         private void goBtn_Click(object sender, EventArgs e)
         {
+            if (resoucePathText.Text.Trim().Equals("") || outText.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("请先选择目录!");
+                return;
+            }
+
+            if (!Directory.Exists(resoucePathText.Text))
+            {
+                MessageBox.Show("您选择的资源目录不存在!");
+                return;
+            }
+
+            bool packageAll = typeComboBox.SelectedIndex == 1;
             Thread objThread = new Thread(new ThreadStart(delegate
             {
-                doInThread();
+                doInThread(packageAll);
             }));
             objThread.Start();
         }
 
 
-        private void doInThread()
+        private void doInThread(bool packageAll)
         {
             string resourcePath = resoucePathText.Text;
             string outDir = outText.Text;
@@ -111,7 +124,6 @@ namespace WzlTool
             foreach (DirectoryInfo resDirItem in resourceDirs)
             {
                 String dirName = resDirItem.Name.ToLower();
-                bool packageAll = typeComboBox.SelectedIndex == 1;
                 if (packageAll || dirName.StartsWith("objects") || dirName.StartsWith("smtiles") || dirName.StartsWith("tiles"))
                 {
                     // 执行PerformStep()函数
