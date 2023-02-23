@@ -90,18 +90,10 @@ namespace WzlTool
                     bool needCompress = true;
                     if (needCompress)
                     {
-                        using (MemoryStream output = new MemoryStream())
-                        {
-                            using (ZlibStream deflateStream = new ZlibStream(output, CompressionMode.Compress))
-                            {
-                                byte[] bytes = imgDataStream.ToArray();
-                                deflateStream.Write(bytes, 0, bytes.Length);
-                                byte[] compressBytes = output.ToArray();
-                                imgSize = compressBytes.Length;
-                                wzlOut.Write(MathUtil.intToBytes(imgSize));
-                                wzlOut.Write(compressBytes);
-                            }
-                        }
+                        byte[] compressBytes = ZlibStream.CompressBuffer(imgDataStream.ToArray());
+                        imgSize = compressBytes.Length;
+                        wzlOut.Write(MathUtil.intToBytes(imgSize));
+                        wzlOut.Write(compressBytes);
                     }
                     else
                     {

@@ -37,6 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
             this.goBtn = new System.Windows.Forms.Button();
+            this.wzlProgressBar = new System.Windows.Forms.ProgressBar();
+            this.progressLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -121,11 +123,28 @@
             this.goBtn.UseVisualStyleBackColor = true;
             this.goBtn.Click += new System.EventHandler(this.goBtn_Click);
             // 
+            // wzlProgressBar
+            // 
+            this.wzlProgressBar.Location = new System.Drawing.Point(80, 256);
+            this.wzlProgressBar.Name = "wzlProgressBar";
+            this.wzlProgressBar.Size = new System.Drawing.Size(460, 23);
+            this.wzlProgressBar.TabIndex = 7;
+            // 
+            // progressLabel
+            // 
+            this.progressLabel.AutoSize = true;
+            this.progressLabel.Location = new System.Drawing.Point(169, 304);
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(0, 12);
+            this.progressLabel.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 238);
+            this.ClientSize = new System.Drawing.Size(615, 426);
+            this.Controls.Add(this.progressLabel);
+            this.Controls.Add(this.wzlProgressBar);
             this.Controls.Add(this.goBtn);
             this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.label3);
@@ -153,6 +172,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox typeComboBox;
         private System.Windows.Forms.Button goBtn;
+        private System.Windows.Forms.ProgressBar wzlProgressBar;
+        private System.Windows.Forms.Label progressLabel;
     }
 }
 
