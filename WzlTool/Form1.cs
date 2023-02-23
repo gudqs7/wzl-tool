@@ -16,7 +16,7 @@ namespace WzlTool
         private void Form1_Load(object sender, EventArgs e)
         {
             typeComboBox.SelectedIndex = 0;
-            resoucePathText.Text = "D:\\nuoran\\资源\\pak补丁\\Data";
+            resoucePathText.Text = "D:\\nuoran\\资源\\wzl测试";
             outText.Text = "D:\\nuoran\\资源\\wzl测试";
 
             //实例化委托
@@ -47,11 +47,22 @@ namespace WzlTool
             if (start)
             {
                 goBtn.Enabled = false;
+                typeComboBox.Enabled = false;
+                resoucePathText.Enabled = false;
+                outText.Enabled = false;
+                button1.Enabled = false;
+                button2.Enabled = false;
                 initProgress0(max);
-            } else
+            }
+            else
             {
                 MessageBox.Show("打包成功!");
                 goBtn.Enabled = true;
+                typeComboBox.Enabled = true;
+                resoucePathText.Enabled = true;
+                outText.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
                 progressLabel.Text = "";
             }
 
@@ -62,7 +73,7 @@ namespace WzlTool
         {
             FolderBrowserDialogHelper folder = new FolderBrowserDialogHelper();
             folder.DirectoryPath = resoucePathText.Text;
-            if(folder.ShowDialog(this) == DialogResult.OK)
+            if (folder.ShowDialog(this) == DialogResult.OK)
             {
                 resoucePathText.Text = folder.DirectoryPath;
             }
@@ -100,7 +111,8 @@ namespace WzlTool
             foreach (DirectoryInfo resDirItem in resourceDirs)
             {
                 String dirName = resDirItem.Name.ToLower();
-                if (dirName.StartsWith("objects") || dirName.StartsWith("smtiles") || dirName.StartsWith("tiles"))
+                bool packageAll = typeComboBox.SelectedIndex == 1;
+                if (packageAll || dirName.StartsWith("objects") || dirName.StartsWith("smtiles") || dirName.StartsWith("tiles"))
                 {
                     // 执行PerformStep()函数
                     this.BeginInvoke(updateTxt, "正在处理: " + dirName);
@@ -123,6 +135,14 @@ namespace WzlTool
             wzlProgressBar.Value = 0;
             // 设置每次增加的步长
             wzlProgressBar.Step = 1;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult.Yes != MessageBox.Show("确定退出吗?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                e.Cancel = true;
+            }
         }
     }
 
