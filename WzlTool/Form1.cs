@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -18,12 +19,6 @@ namespace WzlTool
             typeComboBox.SelectedIndex = 0;
         }
 
-
-
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -42,6 +37,24 @@ namespace WzlTool
             if (folder.ShowDialog(this) == DialogResult.OK)
             {
                 outText.Text = folder.DirectoryPath;
+            }
+        }
+
+        private void goBtn_Click(object sender, EventArgs e)
+        {
+            String resourcePath = resoucePathText.Text;
+            String outDir = outText.Text;
+
+            DirectoryInfo resourceDir = new DirectoryInfo(resourcePath);
+            DirectoryInfo[] resourceDirs = resourceDir.GetDirectories();
+            foreach (DirectoryInfo resDirItem in resourceDirs)
+            {
+                String dirName = resDirItem.Name.ToLower();
+                if (dirName.StartsWith("objects") || dirName.StartsWith("smtiles") || dirName.StartsWith("tiles"))
+                {
+                    Console.WriteLine("处理中: " + dirName);
+                    WzlUtil.WriteWzlBy16(resDirItem.FullName, outDir, dirName);
+                }
             }
         }
     }

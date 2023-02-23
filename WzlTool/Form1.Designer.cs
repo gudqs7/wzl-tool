@@ -36,6 +36,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.goBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -110,11 +111,22 @@
             this.typeComboBox.Size = new System.Drawing.Size(388, 20);
             this.typeComboBox.TabIndex = 3;
             // 
+            // goBtn
+            // 
+            this.goBtn.Location = new System.Drawing.Point(226, 172);
+            this.goBtn.Name = "goBtn";
+            this.goBtn.Size = new System.Drawing.Size(157, 37);
+            this.goBtn.TabIndex = 6;
+            this.goBtn.Text = "开始打包";
+            this.goBtn.UseVisualStyleBackColor = true;
+            this.goBtn.Click += new System.EventHandler(this.goBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 201);
+            this.ClientSize = new System.Drawing.Size(615, 238);
+            this.Controls.Add(this.goBtn);
             this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
@@ -140,6 +152,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox typeComboBox;
+        private System.Windows.Forms.Button goBtn;
     }
 }
 
