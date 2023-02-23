@@ -11,6 +11,10 @@ namespace WzlTool
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             typeComboBox.SelectedIndex = 0;
             resoucePathText.Text = "D:\\nuoran\\资源\\pak补丁\\Data";
             outText.Text = "D:\\nuoran\\资源\\wzl测试";
